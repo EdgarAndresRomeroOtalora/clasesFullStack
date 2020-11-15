@@ -1,8 +1,22 @@
-module.exports = function(db) {
+module.exports = function(databaseConfig) {
     const express = require('express');
     const router = express.Router();
     const TABLE = 'users';
-    let model = require('../models/sqlite-model')(db); 
+    let model;
+     
+    switch (databaseConfig.default) {
+        case 'mongodb':
+            model = require('../models/mongodb-model')(databaseConfig.mongodb,databaseConfig.mongodb_url);
+            break;
+        
+        case 'sqlite':
+            model = require('../models/sqlite-model')(databaseConfig.sqlite); 
+            break;
+    
+        default:
+            model = require('../models/sqlite-model')(databaseConfig.sqlite); 
+            break;
+    }
 
     //{{SERVER}}/users/lista todos los usuarios
     router.get("/", function (request, response){
@@ -91,12 +105,5 @@ module.exports = function(db) {
         
     });
     
-    
-    
-    
-    
-
-
-
     return router;
 }

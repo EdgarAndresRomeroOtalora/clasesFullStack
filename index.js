@@ -3,10 +3,19 @@ const app = express();       //instancia de express
 const bodyParser = require('body-parser');
 const sqlite3 = require('sqlite3').verbose(); //permite registrar todos los cambios realizado en
                                                //la BD logs 
-let db = new sqlite3.Database('./db/db.sqlite3');   
+let sqliteClient = new sqlite3.Database('./db/db.sqlite3');   
+const mongodbCliente = require('mongodb').MongoClient;
+const url = 'mongodb://localhost:27017';
 
-let usersController = require('./app/controllers/users')(db);
-let classesController = require('./app/controllers/classes')(db);
+const databaseConfig = {
+    "sqlite":sqliteClient,
+    "mongodb": mongodbCliente,
+    "mongodb_url":url,
+    "default":'mongodb'
+};
+
+let usersController = require('./app/controllers/users')(databaseConfig);
+let classesController = require('./app/controllers/classes')(databaseConfig);
 
 
 
@@ -18,6 +27,6 @@ app.use('/classes', classesController);
 
 
 
-app.listen(3456, function (){
+app.listen(3455, function (){
     console.log('corriendo')
 });
