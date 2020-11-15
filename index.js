@@ -11,7 +11,7 @@ const databaseConfig = {
     "sqlite":sqliteClient,
     "mongodb": mongodbCliente,
     "mongodb_url":url,
-    "default":'mongodb'
+    "default":'sqlite'
 };
 
 let usersController = require('./app/controllers/users')(databaseConfig);
