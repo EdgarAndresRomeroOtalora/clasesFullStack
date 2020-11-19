@@ -1,3 +1,5 @@
+//const { database } = require("firebase-admin");
+
 const General = function () {
 
     General.defaultDatabase = 'sqlite';

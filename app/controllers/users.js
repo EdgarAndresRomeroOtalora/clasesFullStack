@@ -2,35 +2,10 @@ module.exports=function (databaseConfig) {
     const express = require('express');
     const router = express.Router();
     const TABLE = 'users';
-    let model;
 
-    switch (databaseConfig.default) {
-        case 'mongodb':
-            model = require('../models/mongodb-model')(databaseConfig.mongodb, databaseConfig.mongodb_url);
-            break;
-        case 'sqlite':
-            model = require('../models/sqlite-model')(databaseConfig.sqlite);
-            break;
-        case 'firestore':
-            model = require('../models/firestore-model')(databaseConfig.firestore);
-            break;
-<<<<<<< HEAD
-=======
-        
-        case 'firestore':
-            model = require('../models/firestore-model')(databaseConfig.firestore); 
-            break;
-    
->>>>>>> 8f9adf3dc6adb049b62c80dab26438f69e6b760a
-        default:
-            model = require('../models/sqlite-model')(databaseConfig.sqlite);
-            break;
-    }
-
-    //
-    
-
-    //{{SERVER}}/users/
+    const general = require('../utils/general')();
+    general.setDefaultDatabase('sqlite');
+    let model= general.getDatabaseModel();
 
     //{{SERVER}}/users/create_users
     router.post('/options/initialize', function(request, response){
