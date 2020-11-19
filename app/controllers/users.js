@@ -14,6 +14,14 @@ module.exports=function (databaseConfig) {
         case 'firestore':
             model = require('../models/firestore-model')(databaseConfig.firestore);
             break;
+<<<<<<< HEAD
+=======
+        
+        case 'firestore':
+            model = require('../models/firestore-model')(databaseConfig.firestore); 
+            break;
+    
+>>>>>>> 8f9adf3dc6adb049b62c80dab26438f69e6b760a
         default:
             model = require('../models/sqlite-model')(databaseConfig.sqlite);
             break;
