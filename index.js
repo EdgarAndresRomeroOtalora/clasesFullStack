@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const { response } = require('express');
 
 
-//const general = require('./app/utils/general')();
 
 
 let usersController = require('./app/controllers/users')();
