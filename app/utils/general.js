@@ -2,7 +2,7 @@
 
 const General = function () {
 
-    General.defaultDatabase = 'sqlite';
+    General.defaultDatabase = 'mongodb';
 
 
     if (typeof General.firebase == 'undefined') {
@@ -10,7 +10,7 @@ const General = function () {
         const serviceAccount = require("../../private/key.json");
         admin.initializeApp({
             credential: admin.credential.cert(serviceAccount),
-            GeneralURL: "https://encontre-mi-receta.firebaseio.com"
+            GeneralURL: "gestion-parques.firebaseio.com"
         });
         General.firebase = admin;
     }
@@ -38,7 +38,7 @@ const General = function () {
         return General.mongoDB;
     };
 
-    this.getDatabaseModel = function(){
+    this.getDatabaseModel = function () {
         let model;
         switch (General.defaultDatabase) {
             case 'mongodb':
@@ -57,9 +57,35 @@ const General = function () {
         return model;
     };
 
-    this.setDefaultDatabase = function(database){
+    this.setDefaultDatabase = function (database) {
         General.defaultDatabase = database;
     };
+
+    this.validateLogin = function (request) {
+        let result = { auth: false, message: 'Initial value' };
+
+        let token = request.headers['auth-jwt'];
+
+        if (token) {
+            jwt.verify(token, config.jwt.secret, function (error, decoded) {
+                if (error) {
+                    result.auth = false;
+                    if (typeof error == 'TokenExpiredError') {
+                        result.message = 'el token no es valido, ya expiro en la fecha: ' + error.expiredAt;
+                    } else {
+                        result.message = 'el token no es valido';
+                    }
+
+                }
+            });
+        } else {
+            result.auth = true;
+            result.message = decoded;
+        }
+
+        return result;
+    }
+
 
     return this;
 

@@ -1,0 +1,27 @@
+{
+    "app":{
+        "name": "Aplicación backend para clases",
+        "port": 4000,
+        "bind": "0.0.0.0"
+    },
+    "database":{
+        "default":"sqlite",
+        "mongodb":{
+            "databaseName":"Mi base de datos",
+            "url": "mongodb://localhost:27017"
+        },    
+        "firebase":{
+            "url":"gestion-parques.firebaseio.com"
+        }
+    },
+    "jwt":{
+        "secreto" : "bictia",
+        "timeToExpireInMinutes": 60
+    },
+    "login":{
+        "username": "admin",
+        "password": "12345678",
+        "type": "Admin"
+    }
+    
+}
