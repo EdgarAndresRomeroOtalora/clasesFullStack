@@ -2,11 +2,7 @@
 
 const General = function () {
 
-<<<<<<< HEAD
     General.defaultDatabase = 'firestore';
-=======
-    General.defaultDatabase = 'mongodb';
->>>>>>> 28c5595f4dfcf2c04633457b0b040df9b2421903
 
 
     if (typeof General.firebase == 'undefined') {
@@ -14,13 +10,8 @@ const General = function () {
         const serviceAccount = require("../../private/key.json");
         admin.initializeApp({
             credential: admin.credential.cert(serviceAccount),
-<<<<<<< HEAD
             databaseURL: "https://gestion-parques.firebaseio.com"
           });
-=======
-            GeneralURL: "gestion-parques.firebaseio.com"
-        });
->>>>>>> 28c5595f4dfcf2c04633457b0b040df9b2421903
         General.firebase = admin;
     }
 

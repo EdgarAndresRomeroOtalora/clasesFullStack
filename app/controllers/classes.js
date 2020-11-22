@@ -1,10 +1,11 @@
 module.exports = function (databaseConfig) {
+    /* 
     const express = require('express');
     const router = express.Router();
     const TABLE = 'classes';
 
     const general = require('../utils/general')();
-    general.setDefaultDatabase('sqlite');
+    general.setDefaultDatabase('firestore');
     let model = general.getDatabaseModel();
     var jwt = require('jsonwebtoken');
 
@@ -100,5 +101,5 @@ module.exports = function (databaseConfig) {
             });
     });
 
-    return router;
-}
+    return router;*/
+} 

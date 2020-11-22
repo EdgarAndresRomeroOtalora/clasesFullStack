@@ -1,4 +1,4 @@
-const UserFirebase = function () {
+/* const UserFirebase = function () {
     const express = require('express');
     const router = express.Router();
 
@@ -85,4 +85,4 @@ const UserFirebase = function () {
     return router;
 }
 
-module.exports = UserFirebase;
+module.exports = UserFirebase; */
