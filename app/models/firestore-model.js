@@ -36,7 +36,6 @@ const FirestoreModel = function(firestore){
             });
         });
     };
-
     this.create = function(table, params) {
         return new Promise((resolve, reject) =>{
             firestore.collection(table).add(params)

@@ -4,7 +4,7 @@ module.exports=function (databaseConfig) {
     const TABLE = 'users';
 
     const general = require('../utils/general')();
-    general.setDefaultDatabase('sqlite');
+    general.setDefaultDatabase('firestore');
     let model= general.getDatabaseModel();
 
     //{{SERVER}}/users/create_users

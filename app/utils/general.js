@@ -2,7 +2,7 @@
 
 const General = function () {
 
-    General.defaultDatabase = 'sqlite';
+    General.defaultDatabase = 'firestore';
 
 
     if (typeof General.firebase == 'undefined') {
@@ -10,8 +10,8 @@ const General = function () {
         const serviceAccount = require("../../private/key.json");
         admin.initializeApp({
             credential: admin.credential.cert(serviceAccount),
-            GeneralURL: "https://encontre-mi-receta.firebaseio.com"
-        });
+            databaseURL: "https://gestion-parques.firebaseio.com"
+          });
         General.firebase = admin;
     }
 
