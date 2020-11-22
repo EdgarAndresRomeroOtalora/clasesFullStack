@@ -6,6 +6,7 @@ module.exports = function (databaseConfig) {
     const general = require('../utils/general')();
     general.setDefaultDatabase('firestore');
     let model = general.getDatabaseModel();
+    var jwt = require('jsonwebtoken');
 
     //{{SERVER}}/users/create_users
     router.post('/options/initialize', function (request, response) {
@@ -55,19 +56,21 @@ module.exports = function (databaseConfig) {
         let token = request.headers['auth-jwt'];
 
         if (token) {
-            model.getAll(TABLE)
-                .then((rows) => {
-                    response.send(rows);
-                }).catch((error) => {
-                    console.error(error);
-                    response.send(error);
-                });
-
+            jwt.verify(token, 'bictia', function (error, decoded) {
+                if (error) {
+                    response.send({ error: 'el token utilizado no es valido', message: error })
+                }
+                model.getAll(TABLE)
+                    .then((rows) => {
+                        response.send(rows);
+                    }).catch((error) => {
+                        console.error(error);
+                        response.send(error);
+                    });
+            });
         } else {
-            response.send({error:'no se ha enviado un token'});
+            response.send({ error: 'no se ha enviado un token' });
         }
-
-
     });
 
 

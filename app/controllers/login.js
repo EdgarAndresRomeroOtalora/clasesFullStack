@@ -11,12 +11,15 @@ const LoginController = function () {
             let datos = {
                 user: user,
                 date_login: new Date(),
-                type:   'Admin'
+                type: 'Admin'
             }
             let secreto = 'bictia';
-        
-            let token = jwt.sign(datos,secreto);
-            response.send({token:token});
+
+            let token = jwt.sign({
+                exp: Math.floor(Date.now() / 1000)+(60 * 1),
+                data: datos
+            }, secreto);
+            response.send({ token: token });
         } else {
             response.send('Datos incorrectos');
         }
