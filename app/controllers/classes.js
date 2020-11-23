@@ -1,11 +1,11 @@
 module.exports = function (databaseConfig) {
-    /* 
-    const express = require('express');
+    /* const express = require('express');
     const router = express.Router();
+
     const TABLE = 'classes';
 
     const general = require('../utils/general')();
-    general.setDefaultDatabase('firestore');
+    general.setDefaultDatabase('firebase');
     let model = general.getDatabaseModel();
     var jwt = require('jsonwebtoken');
 
@@ -57,29 +57,63 @@ module.exports = function (databaseConfig) {
         let token = request.headers['auth-jwt'];
 
         if (token) {
-            jwt.verify(token,'bictia', function(error, decoded){
-                if (error){
-                    response.send({error:'el token utilizado no es valido', message: error })
+            jwt.verify(token, 'bictia', function (error, decoded) {
+                if (error) {
+                    response.send({ error: 'el token utilizado no es valido', message: error })
                 }
-
                 model.getAll(TABLE)
-                .then((rows) => {
-                    response.send(rows);
+                    .then((rows) => {
+                        response.send(rows);
+                    }).catch((error) => {
+                        console.error(error);
+                        response.send(error);
+                    });
+            });
+        } else {
+            response.send({ error: 'no se ha enviado un token' });
+        }
+    });
+
+
+    router.post('/options/initialize', function (request, response) {
+        if (general.validateLogin(request))
+            model.initialize(TABLE, request.body)
+                .then((message) => {
+                    response.send(message);
                 }).catch((error) => {
                     console.error(error);
                     response.send(error);
                 });
-            });
-            
-        } else {
-            response.send({ error: 'No se ha enviado un token' });
-        }
-
-
+        else { response.send({ error: 'No se a enviado ningun token' }) };
     });
 
+    //{{SERVER}}/users/delete_users
+    router.get('/options/clean', function (request, response) {
+        if (general.validateLogin(request))
+            model.clean(TABLE)
+                .then((message) => {
+                    response.send(message);
+                }).catch((error) => {
+                    console.error(error);
+                    response.send(error);
+                });
+        else { response.send({ error: 'No se a enviado ningun token' }) };
+    });
 
-    router.get('/:id', function (request, response) {
+    //{{SERVER}}/users/
+    router.post('/', function (request, response) {
+        if (general.validateLogin(request))
+            model.create(TABLE, request.body)
+                .then((object) => {
+                    response.send(object);
+                }).catch((error) => {
+                    console.error(error);
+                    response.send(error);
+                });
+        else { response.send({ error: 'No se a enviado ningun token' }) };
+    });
+
+    router.put('/:id', function (request, response) {
         let id = request.params.id;
         model.getById(TABLE, id)
             .then((row) => {
@@ -101,5 +135,5 @@ module.exports = function (databaseConfig) {
             });
     });
 
-    return router;*/
-} 
+    return router; */
+}

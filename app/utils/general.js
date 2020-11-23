@@ -1,8 +1,10 @@
 //const { database } = require("firebase-admin");
+const jwt = require('jsonwebtoken');
+const config = require('../../config.json');
 
 const General = function () {
 
-    General.defaultDatabase = 'firestore';
+    General.defaultDatabase = config.database.default;
 
 
     if (typeof General.firebase == 'undefined') {
@@ -10,7 +12,7 @@ const General = function () {
         const serviceAccount = require("../../private/key.json");
         admin.initializeApp({
             credential: admin.credential.cert(serviceAccount),
-            databaseURL: "https://gestion-parques.firebaseio.com"
+            databaseURL: config.database.firebase.url
           });
         General.firebase = admin;
     }
@@ -22,7 +24,7 @@ const General = function () {
 
     if (typeof General.mongoDB == 'undefined') {
         const mongodbClient = require('mongodb').MongoClient;
-        const url = 'mongodb://localhost:27017';
+        const url = config.database.mongodb.url;
         General.mongoDB = { client: mongodbClient, url: url };
     }
 
@@ -57,11 +59,7 @@ const General = function () {
         return model;
     };
 
-    this.setDefaultDatabase = function (database) {
-        General.defaultDatabase = database;
-    };
-
-    this.validateLogin = function (request) {
+     this.validateLogin = function (request) {
         let result = { auth: false, message: 'Initial value' };
 
         let token = request.headers['auth-jwt'];

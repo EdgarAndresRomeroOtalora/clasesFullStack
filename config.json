@@ -1,7 +1,7 @@
 {
     "app":{
-        "name": "Aplicación backend para clases",
-        "port": 4000,
+        "name": "Aplicación backend para clases fantabulosos",
+        "port": 5000,
         "bind": "0.0.0.0"
     },
     "database":{
@@ -11,11 +11,11 @@
             "url": "mongodb://localhost:27017"
         },    
         "firebase":{
-            "url":"gestion-parques.firebaseio.com"
+            "url":"https://gestion-parques.firebaseio.com"
         }
     },
     "jwt":{
-        "secreto" : "bictia",
+        "secret" : "bictia",
         "timeToExpireInMinutes": 60
     },
     "login":{
