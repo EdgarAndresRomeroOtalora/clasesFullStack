@@ -9,7 +9,8 @@ const General = function () {
 
     if (typeof General.firebase == 'undefined') {
         const admin = require("firebase-admin");
-        const serviceAccount = require("../../private/key.json");
+        const serviceAccount = process.env.FIREBASE_KEY ? process.env.FIREBASE_KEY : require("../../private/key.json");
+        //const serviceAccount = require("../../private/key.json");
         admin.initializeApp({
             credential: admin.credential.cert(serviceAccount),
             databaseURL: config.database.firebase.url
