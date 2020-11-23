@@ -18,7 +18,7 @@ app.use('/users', usersController);
 //app.use('/classes', classesController);
 app.use('/login', loginController);
 
-app.user('/', (request,response)=>{
+app.use('/', (request,response)=>{
     response.send('Bienvenidos a la API de '+ config.app.name);
 });
 
