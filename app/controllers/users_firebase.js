@@ -1,4 +1,4 @@
-/* const UserFirebase = function () {
+const UserFirebase = function () {
     const express = require('express');
     const router = express.Router();
 
@@ -64,12 +64,9 @@
             };
             admin.auth().createCustomToken(id, customInformation).then(function (customToken) {
                 response.send(customToken);
-                response.send(users.toJSON());
             }).catch(function (error) {
                 response.send(error);
             });
-
-
 
         }).catch(function (error) {
             response.send(error);
@@ -85,4 +82,4 @@
     return router;
 }
 
-module.exports = UserFirebase; */
+module.exports = UserFirebase; 

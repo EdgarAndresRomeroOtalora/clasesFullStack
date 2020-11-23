@@ -6,7 +6,7 @@ const { response } = require('express');
 
 
 
-let usersController = require('./app/controllers/users')();
+let usersController = require('./app/controllers/users_firebase')();
 let classesController = require('./app/controllers/classes')();
 let loginController = require('./app/controllers/login')();
 
