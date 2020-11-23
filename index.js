@@ -6,6 +6,7 @@ const port = process.env.PORT ? process.env.PORT : config.app.port ? config.app.
 const bind = process.env.BIND ? process.env.BIND : config.app.bind ? config.app.port  : '127.0.0.1';
 
 const bodyParser = require('body-parser');
+const { response } = require('express');
 
 let usersController = require('./app/controllers/users_firebase')();
 //let classesController = require('./app/controllers/classes')();
@@ -17,6 +18,9 @@ app.use('/users', usersController);
 //app.use('/classes', classesController);
 app.use('/login', loginController);
 
+app.user('/', (request,response)=>{
+    response.send('Bienvenidos a la API de '+ config.app.name);
+});
 
 
 app.listen(port, bind, function () {
