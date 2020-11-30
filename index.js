@@ -2,30 +2,37 @@ const express = require('express');
 const app = express();
 const config = require('./config.json');
 //const config = require('./app/utils/config');
-const port = process.env.PORT ? process.env.PORT : config.app.port ? config.app.port  : 3000;
-const bind = process.env.BIND ? process.env.BIND : config.app.bind ? config.app.port  : '127.0.0.1';
+const port = process.env.PORT ? process.env.PORT : config.app.port ? config.app.port : 3000;
+const bind = process.env.BIND ? process.env.BIND : config.app.bind ? config.app.port : '127.0.0.1';
 
 const bodyParser = require('body-parser');
-const { response } = require('express');
+const { response, request } = require('express');
 
-let usersController = require('./app/controllers/users_firebase')();
+//let usersController = require('./app/controllers/users_firebase')();
 //let classesController = require('./app/controllers/classes')();
-let loginController = require('./app/controllers/login')();
+//let loginController = require('./app/controllers/login')();
+let heroController = require('./app/controllers/heroes')();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/users', usersController);
-//app.use('/classes', classesController);
-app.use('/login', loginController);
 
-app.use('/', (request,response)=>{
-    response.send('Bienvenidos a la API de '+ config.app.name);
+//app.use('/users', usersController);
+//app.use('/classes', classesController);
+//app.use('/login', loginController);
+app.use('/api', heroController);
+
+
+
+
+app.get('/', (request, response) => {
+    response.send('Bienvenidos a la API de ' + config.app.name);
 });
+
 
 
 app.listen(port, bind, function () {
     console.log('*******************');
-    console.log('aplicacion: '+config.app.name);
-    console.log('corriendo en: '+config.app.bind+':'+config.app.port);
+    console.log('aplicacion: ' + config.app.name);
+    console.log('corriendo en: ' + config.app.bind + ':' + config.app.port);
     console.log('*******************');
 });
