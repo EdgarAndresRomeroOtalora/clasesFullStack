@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const config = require('./config.json');
+const cors = require('cors');
 
 //const config = require('./app/utils/config');
 
@@ -9,7 +10,7 @@ const bind = process.env.BIND ? process.env.BIND : config.app.bind ? config.app.
 
 //var jwt = require('jsonwebtoken');
 
-
+app.use(cors());
 
 const bodyParser = require('body-parser');
 const { request, response } = require('express');
